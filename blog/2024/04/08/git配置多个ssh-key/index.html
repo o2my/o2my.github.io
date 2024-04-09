@@ -10,28 +10,26 @@
           <meta name="author" content="Gordon">
         
         
-          <link rel="canonical" href="http://emo404.com/blog/">
+          <link rel="canonical" href="http://emo404.com/blog/2024/04/08/git%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh-key/">
         
         
-          <link rel="prev" href="../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/">
+          <link rel="prev" href="../../../03/28/markdown/">
         
         
-          <link rel="next" href="category/git/">
         
-        
-        <link rel="icon" href="../assets/g.png">
+        <link rel="icon" href="../../../../../assets/g.png">
         <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
       
       
         
-          <title>📚 - 等待戈登</title>
+          <title>Git配置多个SSH Key - 等待戈登</title>
         
       
       
-        <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e359304.min.css">
         
           
-          <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+          <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
         
         
   
@@ -91,15 +89,15 @@
         
       
       
-        <link rel="stylesheet" href="../stylesheets/extra.css">
+        <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
       
-      <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+      <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
       
         
       
       
       
-     <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+     <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -108,7 +106,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
     
     
       
@@ -127,7 +125,7 @@
       <div data-md-component="skip">
         
           
-          <a href="#_1" class="md-skip">
+          <a href="#ssh-key" class="md-skip">
             跳转至
           </a>
         
@@ -141,7 +139,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="等待戈登" class="md-header__button md-logo" aria-label="等待戈登" data-md-component="logo">
+    <a href="../../../../.." title="等待戈登" class="md-header__button md-logo" aria-label="等待戈登" data-md-component="logo">
       
   <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoMTIwdjEyMEgweiIvPjxwYXRoIGQ9Ik02MCAwYzMzLjEzNyAwIDYwIDI2Ljg2MyA2MCA2MHMtMjYuODYzIDYwLTYwIDYwUzAgOTMuMTM3IDAgNjAgMjYuODYzIDAgNjAgMHptMTcuNSA2NC44MzdjLTYuNDU2IDAtMTEuODIyIDQuNTAyLTEzLjIyMiAxMC41MTYtMy4yNjctMS4zOTctNi4zLTEuMDA5LTguNTU2LS4wMzlDNTQuMjgzIDY5LjMgNDguOTE3IDY0LjgzNyA0Mi41IDY0LjgzN2MtNy41MDYgMC0xMy42MTEgNi4wOTItMTMuNjExIDEzLjU4MkMyOC44ODkgODUuOTA4IDM0Ljk5NCA5MiA0Mi41IDkyYzcuMTU2IDAgMTIuOTUtNS41MSAxMy40OTQtMTIuNDk1IDEuMTY3LS44MTUgNC4yNC0yLjMyOCA4LjAxMi4wNzhDNjQuNjI4IDg2LjUyOSA3MC4zODMgOTIgNzcuNSA5MmM3LjUwNiAwIDEzLjYxMS02LjA5MiAxMy42MTEtMTMuNTgxIDAtNy40OS02LjEwNS0xMy41ODItMTMuNjExLTEzLjU4MnptLTM1IDMuODhjNS4zNjcgMCA5LjcyMiA0LjM0NyA5LjcyMiA5LjcwMiAwIDUuMzU1LTQuMzU1IDkuNy05LjcyMiA5LjctNS4zNjcgMC05LjcyMi00LjM0NS05LjcyMi05LjcgMC01LjM1NSA0LjM1NS05LjcwMSA5LjcyMi05LjcwMXptMzUgMGM1LjM2NyAwIDkuNzIyIDQuMzQ3IDkuNzIyIDkuNzAyIDAgNS4zNTUtNC4zNTUgOS43LTkuNzIyIDkuNy01LjM2NyAwLTkuNzIyLTQuMzQ1LTkuNzIyLTkuNyAwLTUuMzU1IDQuMzU1LTkuNzAxIDkuNzIyLTkuNzAxek05NSA1N0gyNXY0aDcwdi00ek03Mi44NzQgMjkuMzRjLS44LTEuODItMi44NjYtMi43OC00Ljc4NS0yLjE0M0w2MCAyOS45MTRsLTguMTI4LTIuNzE3LS4xOTItLjA1OGMtMS45MjgtLjUzMy0zLjk1NC41MS00LjY2OSAyLjM4N0wzOC4xNDQgNTNoNDMuNzEyTDcyLjk1IDI5LjUyNnoiIGZpbGw9IiNEQURDRTAiLz48L2c+PC9zdmc+" alt="logo">
 
@@ -160,7 +158,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              📚
+              Git配置多个SSH Key
             
           </span>
         </div>
@@ -262,7 +260,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../../../.." class="md-tabs__link">
         
   
     
@@ -281,7 +279,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-tabs__link">
+        <a href="../../../../../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-tabs__link">
           
   
   Data
@@ -301,7 +299,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../../../../" class="md-tabs__link">
           
   
   Blog
@@ -317,7 +315,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../mkdocs/" class="md-tabs__link">
+      <a href="../../../../../mkdocs/" class="md-tabs__link">
         
   
     
@@ -336,7 +334,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../ai/" class="md-tabs__link">
+        <a href="../../../../../ai/" class="md-tabs__link">
           
   
   🤖 AI
@@ -358,7 +356,9 @@
             
               
                 
-                <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                  
+                
+                <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                   <div class="md-sidebar__scrollwrap">
                     <div class="md-sidebar__inner">
                       
@@ -369,7 +369,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="等待戈登" class="md-nav__button md-logo" aria-label="等待戈登" data-md-component="logo">
+    <a href="../../../../.." title="等待戈登" class="md-nav__button md-logo" aria-label="等待戈登" data-md-component="logo">
       
   <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoMTIwdjEyMEgweiIvPjxwYXRoIGQ9Ik02MCAwYzMzLjEzNyAwIDYwIDI2Ljg2MyA2MCA2MHMtMjYuODYzIDYwLTYwIDYwUzAgOTMuMTM3IDAgNjAgMjYuODYzIDAgNjAgMHptMTcuNSA2NC44MzdjLTYuNDU2IDAtMTEuODIyIDQuNTAyLTEzLjIyMiAxMC41MTYtMy4yNjctMS4zOTctNi4zLTEuMDA5LTguNTU2LS4wMzlDNTQuMjgzIDY5LjMgNDguOTE3IDY0LjgzNyA0Mi41IDY0LjgzN2MtNy41MDYgMC0xMy42MTEgNi4wOTItMTMuNjExIDEzLjU4MkMyOC44ODkgODUuOTA4IDM0Ljk5NCA5MiA0Mi41IDkyYzcuMTU2IDAgMTIuOTUtNS41MSAxMy40OTQtMTIuNDk1IDEuMTY3LS44MTUgNC4yNC0yLjMyOCA4LjAxMi4wNzhDNjQuNjI4IDg2LjUyOSA3MC4zODMgOTIgNzcuNSA5MmM3LjUwNiAwIDEzLjYxMS02LjA5MiAxMy42MTEtMTMuNTgxIDAtNy40OS02LjEwNS0xMy41ODItMTMuNjExLTEzLjU4MnptLTM1IDMuODhjNS4zNjcgMCA5LjcyMiA0LjM0NyA5LjcyMiA5LjcwMiAwIDUuMzU1LTQuMzU1IDkuNy05LjcyMiA5LjctNS4zNjcgMC05LjcyMi00LjM0NS05LjcyMi05LjcgMC01LjM1NSA0LjM1NS05LjcwMSA5LjcyMi05LjcwMXptMzUgMGM1LjM2NyAwIDkuNzIyIDQuMzQ3IDkuNzIyIDkuNzAyIDAgNS4zNTUtNC4zNTUgOS43LTkuNzIyIDkuNy01LjM2NyAwLTkuNzIyLTQuMzQ1LTkuNzIyLTkuNyAwLTUuMzU1IDQuMzU1LTkuNzAxIDkuNzIyLTkuNzAxek05NSA1N0gyNXY0aDcwdi00ek03Mi44NzQgMjkuMzRjLS44LTEuODItMi44NjYtMi43OC00Ljc4NS0yLjE0M0w2MCAyOS45MTRsLTguMTI4LTIuNzE3LS4xOTItLjA1OGMtMS45MjgtLjUzMy0zLjk1NC41MS00LjY2OSAyLjM4N0wzOC4xNDQgNTNoNDMuNzEyTDcyLjk1IDI5LjUyNnoiIGZpbGw9IiNEQURDRTAiLz48L2c+PC9zdmc+" alt="logo">
 
@@ -386,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -446,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-nav__link">
+      <a href="../../../../../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -507,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-nav__link">
+      <a href="../../../../../data_analysis/visualization/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%9B%B4%E4%B8%93%E4%B8%9A/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -589,19 +589,10 @@
   
   
     
-      
-    
   
   
     <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="../../../../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -610,7 +601,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -668,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="archive/2024/" class="md-nav__link">
+      <a href="../../../../archive/2024/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -742,7 +732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="category/git/" class="md-nav__link">
+      <a href="../../../../category/git/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -765,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="category/%E8%A7%84%E8%8C%83/" class="md-nav__link">
+      <a href="../../../../category/%E8%A7%84%E8%8C%83/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -801,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mkdocs/" class="md-nav__link">
+      <a href="../../../../../mkdocs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -861,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ai/" class="md-nav__link">
+      <a href="../../../../../ai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -890,6 +880,8 @@
               
               
                 
+                  
+                
               
                 <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                    
@@ -904,8 +896,74 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSH-Key是什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH-Key是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#private-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      私钥（Private Key）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      公钥（Public Key）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git的SSH密钥工作原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么使用SSH密钥
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gitssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git配置多个SSH-Key
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                     </div>
@@ -914,103 +972,196 @@
               
             
             
-  <div class="md-content" data-md-component="content">
-    <div class="md-content__inner">
-      <header class="md-typeset">
-        <h1 id="_1">📚</h1>
-      </header>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="http://emo404.com/assets/setting_img/avatar.png" alt="Gordon">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2024-04-08 12:30:00">2024年4月8日</time></li>
-        
-          <li class="md-meta__item">
-            分类于
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
             
-              <a href="category/git/" class="md-meta__link">git</a></li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="gitssh-key"><a class="toclink" href="2024/04/08/git%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh-key/">Git配置多个SSH Key</a></h2>
-<p>什么是SSH-Key？Git如何配置多个SSH-Key？</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2024/04/08/git%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh-key/">
-          继续阅读
-        </a>
-      </nav>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="http://emo404.com/assets/setting_img/avatar.png" alt="Gordon">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2024-03-28 15:41:00">2024年3月28日</time></li>
-        
-          <li class="md-meta__item">
-            分类于
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="http://emo404.com/assets/setting_img/avatar.png" alt="Gordon">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="http://emo404.com">Gordon</a>
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
             
-              <a href="category/%E8%A7%84%E8%8C%83/" class="md-meta__link">规范</a></li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="markdown"><a class="toclink" href="2024/03/28/markdown/">Markdown</a></h2>
-
-    
-      <nav class="md-post__action">
-        <a href="2024/03/28/markdown/">
-          继续阅读
-        </a>
-      </nav>
-    
-  </div>
-</article>
-      
-      
-        
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2024-04-08 12:30:00" class="md-ellipsis">2024年4月8日</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                          <span class="md-ellipsis">
+                            分类于
+                            
+                              <a href="../../../../category/git/">git</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
           
-
-
-
-<nav class="md-pagination">
-  
-</nav>
-        
-      
+        </div>
+      </div>
     </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+  <h1>Git配置多个SSH Key</h1>
+
+<p>什么是SSH-Key？Git如何配置多个SSH-Key？</p>
+<!-- more -->
+
+<h2 id="ssh-key">SSH-Key是什么？</h2>
+<p>Git的SSH密钥用于在客户端和远程仓库之间建立安全的通信连接。具体来说，SSH（Secure Shell）密钥对是一种公钥加密方法，它包括一个私钥和一个公钥。</p>
+<h3 id="private-key">私钥（Private Key）</h3>
+<p>私钥是保密的，它存储在你的本地计算机上。私钥用于在与远程服务器通信时对数据进行加密和签名，以证明你的身份。私钥应该始终保持私密，不泄露给任何人。</p>
+<h3 id="public-key">公钥（Public Key）</h3>
+<p>公钥是公开的，可以安全地分享给任何需要验证你身份的服务器或服务。公钥用于解密由你的私钥加密的数据，或者验证由私钥签名的数据确实是由你的私钥创建的。</p>
+<h3 id="gitssh">Git的SSH密钥工作原理</h3>
+<p>Git的SSH密钥基于公钥加密原理，使用一对密钥来实现安全的数据传输和身份验证：一个私钥和一个公钥。</p>
+<ol>
+<li>
+<p><strong>密钥生成</strong>：
+   当你使用<code>ssh-keygen</code>命令生成SSH密钥对时，它会创建一个私钥和一个公钥。私钥存储在你的本地计算机上的<code>~/.ssh</code>目录中，而公钥可以被复制并放置在远程服务器上。</p>
+</li>
+<li>
+<p><strong>公钥分发</strong>：
+   公钥的目的是让远程服务器能够验证你的身份。在Git的情况下，你会将公钥添加到远程仓库服务（如GitHub、GitLab等）的账户设置中。这样，当你尝试与远程仓库通信时，服务器可以使用这个公钥来验证你的身份。</p>
+</li>
+<li>
+<p><strong>身份验证过程</strong>：
+   当你尝试通过SSH连接到远程服务器（例如，执行<code>git push</code>或<code>git pull</code>）时，服务器会发送一个随机生成的质询（challenge）给你的客户端。你的客户端使用私钥对这个质询进行加密，然后将加密后的响应发送回服务器。</p>
+</li>
+<li>
+<p><strong>验证响应</strong>：
+   服务器收到加密后的响应后，会使用你的公钥尝试解密这个响应。如果解密成功，并且解密后的质询与原始的质询相匹配，服务器就会确认你的身份，并允许你访问远程仓库。这个过程称为数字签名验证。</p>
+</li>
+</ol>
+<h3 id="ssh">为什么使用SSH密钥</h3>
+<ul>
+<li><strong>安全性</strong>：SSH密钥提供了比传统密码更强的安全性。即使有人截获了加密的数据，没有相应的私钥也无法解密和访问数据。</li>
+<li><strong>方便性</strong>：一旦设置了SSH密钥，你就可以在不输入密码的情况下安全地与远程仓库通信。</li>
+<li><strong>控制访问</strong>：你可以为不同的远程仓库设置不同的SSH密钥，从而实现细粒度的访问控制。</li>
+</ul>
+<p>通过使用SSH密钥，Git可以确保只有经过授权的用户才能访问和修改远程仓库中的数据，同时保证了通信的安全性和私密性。</p>
+<h2 id="gitssh-key">Git配置多个SSH-Key</h2>
+<p>以github和gitee为例。</p>
+<ol>
+<li>生成第一个 SSH-Key</li>
+</ol>
+<p><code>bash
+ssh-keygen -t rsa -C 'xx@163.com' -f ~/.ssh/gitee_id_rsa`</code></p>
+<ol>
+<li>生成第二个 SSH-Key</li>
+</ol>
+<p><code>bash
+`ssh-keygen -t rsa -C 'xx@outlook.com' -f ~/.ssh/github_id_rsa`</code></p>
+<p>其中：  </p>
+<ul>
+<li><code>-t</code>：key 类型</li>
+<li><code>-C</code>：注释 </li>
+<li>
+<p><code>-f</code>：指定生成的文件名</p>
+</li>
+<li>
+<p>在 ~/.ssh 目录下新建一个 config 文件</p>
+</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># gitee</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Host<span class="w"> </span>gitee.com
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>HostName<span class="w"> </span>gitee.com
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>PreferredAuthentications<span class="w"> </span>publickey
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>IdentityFile<span class="w"> </span>~/.ssh/gitee_id_rsa
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># github</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Host<span class="w"> </span>github.com
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>HostName<span class="w"> </span>github.com
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>PreferredAuthentications<span class="w"> </span>publickey
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>IdentityFile<span class="w"> </span>~/.ssh/github_id_rsa
+</span></code></pre></div>
+<p>~/. 目录下应有如下文件：</p>
+<p><code>bash
+(base) gjd@MBP .ssh % cd ~/.ssh
+(base) gjd@MBP .ssh % ls
+config          gitee_id_rsa.pub    github_id_rsa.pub   known_hosts.old
+gitee_id_rsa        github_id_rsa       known_hosts</code></p>
+<ol>
+<li>在Gitee 和 Github中添加公钥</li>
+</ol>
+<p><a class="glightbox" href="../../../../../assets/doc_images/image-20240409113722178.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="gitee" src="../../../../../assets/doc_images/image-20240409113722178.png" /></a></p>
+<p><a class="glightbox" href="../../../../../assets/doc_images/image-20240409113619131.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="github" src="../../../../../assets/doc_images/image-20240409113619131.png" /></a></p>
+<ol>
+<li>测试是否成功</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh<span class="w"> </span>-T<span class="w"> </span>git@gitee.com
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ssh<span class="w"> </span>-T<span class="w"> </span>git@github.com<span class="w"> </span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 成功提示：</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Hi ${username}! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</span>
+</span></code></pre></div>
+<p><strong>配置多个SSH-Key后，实际使用过程中，Git会根据推送或拉取的远程仓库URL来选择正确的密钥，无需手动切换。</strong></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
   </div>
 
             
@@ -1092,10 +1243,10 @@
         <div class="md-progress" data-md-component="progress" role="progressbar"></div>
       
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.path", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "announce.dismiss"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.path", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
       
       
-        <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+        <script src="../../../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
         
       
     <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
